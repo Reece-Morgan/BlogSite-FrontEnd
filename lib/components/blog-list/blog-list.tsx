@@ -12,6 +12,7 @@ export const BlogList = () => {
     const fetchData = async () => {
       const res: AllBlogs = await callApiRoute("getAllBlogItems");
       setBlogList(res.response);
+      setIsLoading(false);
     };
 
     fetchData();
