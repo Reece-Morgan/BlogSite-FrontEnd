@@ -18,7 +18,9 @@
       }
     ],
     "paths": {
-      "@blog/components": ["./lib/components/index.ts"]
+      "@blog/api": ["./lib/api/index.ts"],
+      "@blog/components": ["./lib/components/index.ts"],
+      "@blog/types": ["./lib/types/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
