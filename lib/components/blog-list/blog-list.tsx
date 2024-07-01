@@ -6,6 +6,7 @@ import { BlogItem, BlogList as AllBlogs } from "@blog/types";
 
 export const BlogList = () => {
   const [blogList, setBlogList] = useState<BlogItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,12 +19,22 @@ export const BlogList = () => {
 
   return (
     <Wrapper>
-      <h2>Blog List</h2>
-      <ul>
-        {blogList.map((item: any) => (
-          <li key={item.id}>{item.title}</li>
-        ))}
-      </ul>
+      {isLoading ? (
+        <p>fetching blog posts...</p>
+      ) : (
+        <>
+          <h2>Blog List</h2>
+          {blogList.length === 0 ? (
+            <p>There are no blog posts to display</p>
+          ) : (
+            <ul>
+              {blogList.map((item: any) => (
+                <li key={item.id}>{item.title}</li>
+              ))}
+            </ul>
+          )}
+        </>
+      )}
     </Wrapper>
   );
 };
