@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
+import styles from "./auth.module.css";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -32,8 +33,8 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={submit}>
-      <h1>Please Sign In</h1>
+    <form onSubmit={submit} className={styles.form}>
+      <h1>Log In</h1>
       <input
         type="email"
         placeholder="Email"

@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+  gap: 20px;
+}
+
+.form input {
+  font-size: 1em;
+}
+
+.form button {
+  font-size: 1em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 2px solid #f1356d;
+  background-color: #f1356d;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background-color: #fff;
+  color: #f1356d;
+}
+
+.form p {
+  background-color: darkred;
+  padding: 5px 10px;
+  border-radius: 5px;
+}

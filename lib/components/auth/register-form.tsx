@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
+import styles from "./auth.module.css";
 
 export const RegisterForm = () => {
   const router = useRouter();
@@ -12,18 +13,22 @@ export const RegisterForm = () => {
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    await fetch("http://localhost:5189/api/register", {
+    const data = await fetch("http://localhost:5189/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password }),
     });
 
+    const res = await data.json();
+
+    // TODO: log user in on successful register
+
     await router.push('/login');
   };
 
   return (
-    <form onSubmit={submit}>
-      <h1>Please Register</h1>
+    <form onSubmit={submit} className={styles.form}>
+      <h1>Register</h1>
       <input
         type="text"
         placeholder="Username"
@@ -42,7 +47,7 @@ export const RegisterForm = () => {
         required
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit">Submit</button>
+      <button type="submit">Register</button>
     </form>
   );
 };

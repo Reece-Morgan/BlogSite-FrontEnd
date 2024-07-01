@@ -6,6 +6,10 @@ export default function Home() {
     <>
       <Header />
       <main className={styles.main}>
+        <p className={styles.intro}>
+          Welcome to the blog site for developers. Here you will find articles
+          on various topics related to software development.
+        </p>
         <BlogList />
       </main>
     </>
