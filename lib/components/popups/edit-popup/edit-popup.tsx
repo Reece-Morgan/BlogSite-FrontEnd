@@ -1,23 +1,25 @@
 "use client";
 
-import { callApiRouteForCreation } from "@blog/api";
+import { callApiRouteForEdits } from "@blog/api";
 import styles from "../popup.module.css";
 import { useState } from "react";
 
 interface Props {
-  username: string;
+  username: string,
+  id: string;
   showPopup: (show: boolean) => void;
 }
 
-export const CreatePopup = ({ username, showPopup }: Props) => {
+export const EditPopup = ({ username, id, showPopup }: Props) => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
-  const createPost = async () => {
-    const res = await callApiRouteForCreation(
+  const editPost = async () => {
+    const res = await callApiRouteForEdits(
       title,
       content,
-      username
+      username,
+      id
     );
     console.log("debug: ", res);
     showPopup(false);
@@ -27,8 +29,8 @@ export const CreatePopup = ({ username, showPopup }: Props) => {
     <>
       <div className={styles.overlay} />
       <div className={styles.popup}>
-        <h2>Create Blog Post</h2>
-        <form onSubmit={createPost} className={styles.form}>
+        <h2>Edit Blog Post</h2>
+        <form onSubmit={editPost} className={styles.form}>
           <div>
             <label htmlFor="title">Title</label>
             <input
@@ -52,7 +54,7 @@ export const CreatePopup = ({ username, showPopup }: Props) => {
             />
           </div>
           <div className={styles.createButtons}>
-            <button type="submit">Create</button>
+            <button type="submit">Edit</button>
             <button onClick={() => showPopup(false)}>Cancel</button>
           </div>
         </form>

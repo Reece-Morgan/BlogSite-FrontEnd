@@ -48,7 +48,7 @@ export const Dashboard = () => {
           {blogList.length === 0 ? (
             <p>You haven&#39;t written any blog posts yet!</p>
           ) : (
-            <DashboardItem blogList={blogList} />
+            <DashboardItem blogList={blogList} username={username} />
           )}
           {showCreate && <CreatePopup username={username} showPopup={setShowCreate} />}
         </div>

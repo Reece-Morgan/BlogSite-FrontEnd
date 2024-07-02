@@ -12,7 +12,6 @@ export const callApiRoute = async (endpoint: string, param?: string) => {
 };
 
 export const callApiRouteForCreation = async (
-  endpoint: string,
   title: string,
   content: string,
   username: string
@@ -22,7 +21,28 @@ export const callApiRouteForCreation = async (
   headers.append("content", content);
   headers.append("username", username);
 
-  const res = fetch(`/api/${endpoint}`, {
+  const res = fetch(`/api/createBlogItem`, {
+    headers: headers,
+  });
+
+  const response = (await res).json();
+
+  return response;
+};
+
+export const callApiRouteForEdits = async (
+  title: string,
+  content: string,
+  username: string,
+  id: string
+) => {
+  const headers = new Headers();
+  headers.append("title", title);
+  headers.append("content", content);
+  headers.append("username", username);
+  headers.append("id", id);
+
+  const res = fetch(`/api/editBlogItem`, {
     headers: headers,
   });
 
@@ -45,6 +65,29 @@ export const createBlogItem = async (
   username: string
 ) => {
   const data = await fetch("http://localhost:5189/api/blog/create", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title,
+      content,
+      author: username,
+      dateCreated: new Date(),
+      readLength: 2,
+    }),
+  });
+
+  const response = await data.json();
+
+  return response;
+};
+
+export const editBlogItem = async (
+  title: string,
+  content: string,
+  username: string,
+  id: string
+) => {
+  const data = await fetch(`http://localhost:5189/api/blog/edit${id}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

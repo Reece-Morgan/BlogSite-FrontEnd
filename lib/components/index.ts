@@ -8,3 +8,4 @@ export * from "./blog-list/blog-list";
 export * from "./header/header";
 export * from "./popups/create-popup/create-popup";
 export * from "./popups/delete-popup/delete-popup";
+export * from "./popups/edit-popup/edit-popup";
