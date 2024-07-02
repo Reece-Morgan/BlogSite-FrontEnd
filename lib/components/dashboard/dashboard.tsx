@@ -5,11 +5,13 @@ import styles from "./dashboard.module.css";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DashboardItem } from "../dashboard-item/dashboard-item";
+import { CreatePopup } from "../popups/create-popup/create-popup";
 
 export const Dashboard = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [blogList, setBlogList] = useState<BlogItem[]>([]);
+  const [showCreate, setShowCreate] = useState<boolean>(false);
 
   useEffect(() => {
     const getUser = async () => {
@@ -41,12 +43,13 @@ export const Dashboard = () => {
     <>
       {!isLoading && (
         <div className={styles.dashboard}>
-          <button>New Blog Post</button>
+          <button onClick={() => setShowCreate(true)}>New Blog Post</button>
           {blogList.length === 0 ? (
             <p>You haven&#39;t written any blog posts yet!</p>
           ) : (
             <DashboardItem blogList={blogList} />
           )}
+          {showCreate && <CreatePopup showPopup={setShowCreate} />}
         </div>
       )}
     </>

@@ -10,10 +10,10 @@
 
 .popup {
   position: absolute;
-  top: calc(50% - 150px);
+  top: calc(50% - 200px);
   left: calc(50% - 200px);
   width: 400px;
-  height: 300px;
+  height: 400px;
   z-index: 12;
   background-color: #808080;
   border-radius: 10px;
@@ -29,5 +29,28 @@
 }
 
 .buttons button {
+  width: 100px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form .createButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.createButtons button {
   width: 100px;
 }
