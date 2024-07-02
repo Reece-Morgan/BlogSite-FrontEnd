@@ -18,8 +18,8 @@ export const DashboardItem = ({ blogList }: Props) => {
       <h2>Your Blog Posts</h2>
       <ul>
         {blogList.map((item) => (
-          <>
-            <li key={item.id}>
+          <div key={item.id}>
+            <li>
               <Link href={`/blog/${item.id}`}>
                 <h3>{item.title}</h3>
                 <p>{format(item.dateCreated, "dd/MM/yyyy kk:mm")}</p>
@@ -32,7 +32,7 @@ export const DashboardItem = ({ blogList }: Props) => {
             {showDelete && (
               <DeletePopup id={item.id.toString()} showPopup={setShowDelete} />
             )}
-          </>
+          </div>
         ))}
       </ul>
     </section>

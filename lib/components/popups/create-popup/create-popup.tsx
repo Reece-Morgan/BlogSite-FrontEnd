@@ -1,13 +1,25 @@
-import { callApiRoute } from "@blog/api";
+"use client";
+
+import { callApiRouteForCreation } from "@blog/api";
 import styles from "../popup.module.css";
+import { useState } from "react";
 
 interface Props {
+  username: string;
   showPopup: (show: boolean) => void;
 }
 
-export const CreatePopup = ({ showPopup }: Props) => {
+export const CreatePopup = ({ username, showPopup }: Props) => {
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+
   const createPost = async () => {
-    const res = await callApiRoute("createBlogItem");
+    const res = await callApiRouteForCreation(
+      "createBlogItem",
+      title,
+      content,
+      username
+    );
     console.log("debug: ", res);
     showPopup(false);
   };
@@ -25,6 +37,7 @@ export const CreatePopup = ({ showPopup }: Props) => {
               placeholder="Blog Post Title"
               id="title"
               required
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div>
@@ -36,6 +49,7 @@ export const CreatePopup = ({ showPopup }: Props) => {
               id="content"
               maxLength={500}
               required
+              onChange={(e) => setContent(e.target.value)}
             />
           </div>
           <div className={styles.createButtons}>

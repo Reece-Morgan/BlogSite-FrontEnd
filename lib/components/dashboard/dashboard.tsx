@@ -12,6 +12,7 @@ export const Dashboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [blogList, setBlogList] = useState<BlogItem[]>([]);
   const [showCreate, setShowCreate] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('');
 
   useEffect(() => {
     const getUser = async () => {
@@ -21,7 +22,7 @@ export const Dashboard = () => {
       const res = await data.json();
 
       if (res.status !== 401) {
-        setIsLoading(false);
+        setUsername(res.username);
         const response = await fetch(
           `http://localhost:5189/api/blog/get-by-user/${res.username}`,
           {
@@ -30,7 +31,7 @@ export const Dashboard = () => {
         );
         const items = await response.json();
         setBlogList(items);
-        console.log("debug: ", items);
+        setIsLoading(false);
       } else {
         router.push("/");
       }
@@ -49,7 +50,7 @@ export const Dashboard = () => {
           ) : (
             <DashboardItem blogList={blogList} />
           )}
-          {showCreate && <CreatePopup showPopup={setShowCreate} />}
+          {showCreate && <CreatePopup username={username} showPopup={setShowCreate} />}
         </div>
       )}
     </>
