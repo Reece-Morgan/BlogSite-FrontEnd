@@ -96,7 +96,7 @@ export const editBlogItem = async (
   id: string
 ) => {
   const data = await fetch(`http://localhost:5189/api/blog/edit${id}`, {
-    method: "POST",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       title,
