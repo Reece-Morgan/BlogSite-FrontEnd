@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { callApiRoute } from "@blog/api";
-import { BlogItem, BlogList as AllBlogs } from "@blog/types";
+import { BlogItem as BlogPost, BlogList as AllBlogs } from "@blog/types";
+import { BlogItem } from "@blog/components";
 
 export const BlogList = () => {
-  const [blogList, setBlogList] = useState<BlogItem[]>([]);
+  const [blogList, setBlogList] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -28,11 +29,7 @@ export const BlogList = () => {
           {blogList.length === 0 ? (
             <p>There are no blog posts to display</p>
           ) : (
-            <ul>
-              {blogList.map((item: any) => (
-                <li key={item.id}>{item.title}</li>
-              ))}
-            </ul>
+            <BlogItem blogList={blogList} />
           )}
         </>
       )}
