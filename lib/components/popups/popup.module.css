@@ -1,0 +1,33 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.popup {
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 200px);
+  width: 400px;
+  height: 300px;
+  z-index: 12;
+  background-color: #808080;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.buttons button {
+  width: 100px;
+}

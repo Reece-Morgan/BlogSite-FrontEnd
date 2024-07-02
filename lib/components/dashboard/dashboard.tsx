@@ -21,7 +21,7 @@ export const Dashboard = () => {
       if (res.status !== 401) {
         setIsLoading(false);
         const response = await fetch(
-          `http://localhost:5189/api/BlogItems/user/${res.username}`,
+          `http://localhost:5189/api/blog/get-by-user/${res.username}`,
           {
             credentials: "include",
           }
