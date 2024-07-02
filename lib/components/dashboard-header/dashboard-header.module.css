@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+}
+
+.auth {
+  display: flex;
+  gap: 30px;
+  text-transform: capitalize;
+}

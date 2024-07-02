@@ -42,7 +42,7 @@ export const Header = () => {
 
       {isLoggedIn ? (
         <div className={styles.auth}>
-          <p>Hi {username}</p>
+          <Link href="/user-dashboard">Hi {username}</Link>
           <Link href="#" onClick={logout}>
             Logout
           </Link>
