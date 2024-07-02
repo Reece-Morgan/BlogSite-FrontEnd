@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 6rem;
+  min-height: 100vh;
+}
+
+.main .title h2 {
+  text-transform: capitalize;
+}
+
+.main .title .byline {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.main .title .byline p {
+  font-size: 0.85em;
+}
+
+.main .content {
+  padding: 2rem 0;
+  font-size: 1.25em;
+}

@@ -59,6 +59,14 @@ export const getAllBlogItems = async () => {
   return response;
 };
 
+export const getBlogItemById = async (id: number) => {
+  const data = await fetch(`http://localhost:5189/api/blog/get-by-id/${id}`);
+
+  const response = await data.json();
+
+  return response;
+};
+
 export const createBlogItem = async (
   title: string,
   content: string,

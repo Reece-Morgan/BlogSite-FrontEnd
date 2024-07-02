@@ -1,7 +1,12 @@
 export type BlogList = {
   message: string;
   response: BlogItem[];
-}
+};
+
+export type SingleBlogItem = {
+  message: string;
+  response: BlogItem;
+};
 
 export type BlogItem = {
   id: number;
@@ -10,4 +15,4 @@ export type BlogItem = {
   author: string;
   dateCreated: string;
   readLength: number;
-}
+};

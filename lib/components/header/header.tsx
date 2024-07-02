@@ -38,7 +38,9 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <h1>The Developer&#39;s Blog Site</h1>
+      <Link href="/">
+        <h1>The Developer&#39;s Blog Site</h1>
+      </Link>
 
       {isLoggedIn ? (
         <div className={styles.auth}>
