@@ -8,6 +8,6 @@ export type BlogItem = {
   title: string;
   content: string;
   author: string;
-  dataCreated: string;
+  dateCreated: string;
   readLength: number;
 }
