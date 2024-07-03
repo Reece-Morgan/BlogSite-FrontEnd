@@ -6,7 +6,7 @@ import { useState } from "react";
 
 interface Props {
   username: string,
-  id: string;
+  id: number;
   showPopup: (show: boolean) => void;
 }
 
@@ -19,7 +19,7 @@ export const EditPopup = ({ username, id, showPopup }: Props) => {
       title,
       content,
       username,
-      id
+      id.toString()
     );
     console.log("debug: ", res);
     showPopup(false);

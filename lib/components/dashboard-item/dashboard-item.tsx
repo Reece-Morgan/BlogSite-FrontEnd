@@ -11,11 +11,23 @@ import { EditPopup } from "../popups/edit-popup/edit-popup";
 interface Props {
   blogList: BlogItem[];
   username: string;
+  updateList: () => void;
 }
 
-export const DashboardItem = ({ blogList, username }: Props) => {
+export const DashboardItem = ({ blogList, username, updateList }: Props) => {
+  const [id, setId] = useState<number>(0);
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const [showEdit, setShowEdit] = useState<boolean>(false);
+
+  const openDeletePopup = (id: number) => {
+    setId(id);
+    setShowDelete(true);
+  };
+
+  const openEditPopup = (id: number) => {
+    setId(id);
+    setShowEdit(true)
+  };
 
   return (
     <section className={styles.posts}>
@@ -29,23 +41,27 @@ export const DashboardItem = ({ blogList, username }: Props) => {
                 <p>{format(item.dateCreated, "dd/MM/yyyy kk:mm")}</p>
               </Link>
               <div>
-                <button onClick={() => setShowEdit(true)}>Edit</button>
-                <button onClick={() => setShowDelete(true)}>Delete</button>
+                <button onClick={() => openEditPopup(item.id)}>Edit</button>
+                <button onClick={() => openDeletePopup(item.id)}>Delete</button>
               </div>
             </li>
-            {showEdit && (
-              <EditPopup
-                username={username}
-                id={item.id.toString()}
-                showPopup={setShowEdit}
-              />
-            )}
-            {showDelete && (
-              <DeletePopup id={item.id.toString()} showPopup={setShowDelete} />
-            )}
           </div>
         ))}
       </ul>
+      {showEdit && (
+        <EditPopup
+          username={username}
+          id={id}
+          showPopup={setShowEdit}
+        />
+      )}
+      {showDelete && (
+        <DeletePopup
+          id={id}
+          showPopup={setShowDelete}
+          updateList={updateList}
+        />
+      )}
     </section>
   );
 };

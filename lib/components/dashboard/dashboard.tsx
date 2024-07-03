@@ -12,31 +12,31 @@ export const Dashboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [blogList, setBlogList] = useState<BlogItem[]>([]);
   const [showCreate, setShowCreate] = useState<boolean>(false);
-  const [username, setUsername] = useState<string>('');
+  const [username, setUsername] = useState<string>("");
+
+  const getUser = async () => {
+    const data = await fetch("http://localhost:5189/api/user", {
+      credentials: "include",
+    });
+    const res = await data.json();
+
+    if (res.status !== 401) {
+      setUsername(res.username);
+      const response = await fetch(
+        `http://localhost:5189/api/blog/get-by-user/${res.username}`,
+        {
+          credentials: "include",
+        }
+      );
+      const items = await response.json();
+      setBlogList(items);
+      setIsLoading(false);
+    } else {
+      router.push("/");
+    }
+  };
 
   useEffect(() => {
-    const getUser = async () => {
-      const data = await fetch("http://localhost:5189/api/user", {
-        credentials: "include",
-      });
-      const res = await data.json();
-
-      if (res.status !== 401) {
-        setUsername(res.username);
-        const response = await fetch(
-          `http://localhost:5189/api/blog/get-by-user/${res.username}`,
-          {
-            credentials: "include",
-          }
-        );
-        const items = await response.json();
-        setBlogList(items);
-        setIsLoading(false);
-      } else {
-        router.push("/");
-      }
-    };
-
     getUser();
   }, []);
 
@@ -48,9 +48,11 @@ export const Dashboard = () => {
           {blogList.length === 0 ? (
             <p>You haven&#39;t written any blog posts yet!</p>
           ) : (
-            <DashboardItem blogList={blogList} username={username} />
+            <DashboardItem blogList={blogList} username={username} updateList={getUser} />
           )}
-          {showCreate && <CreatePopup username={username} showPopup={setShowCreate} />}
+          {showCreate && (
+            <CreatePopup username={username} showPopup={setShowCreate} />
+          )}
         </div>
       )}
     </>
