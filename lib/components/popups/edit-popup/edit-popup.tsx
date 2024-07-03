@@ -1,27 +1,34 @@
 "use client";
 
-import { callApiRouteForEdits } from "@blog/api";
 import styles from "../popup.module.css";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 
 interface Props {
-  username: string,
+  username: string;
   id: number;
   showPopup: (show: boolean) => void;
+  updateList: () => void;
 }
 
-export const EditPopup = ({ username, id, showPopup }: Props) => {
+export const EditPopup = ({ username, id, showPopup, updateList }: Props) => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
-  const editPost = async () => {
-    const res = await callApiRouteForEdits(
-      title,
-      content,
-      username,
-      id.toString()
-    );
-    console.log("debug: ", res);
+  const editPost = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    await fetch(`http://localhost:5189/api/blog/update/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id,
+        title,
+        content,
+        author: username,
+        dateCreated: new Date(),
+        readLength: 2,
+      }),
+    });
+    updateList();
     showPopup(false);
   };
 

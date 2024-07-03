@@ -53,6 +53,7 @@ export const DashboardItem = ({ blogList, username, updateList }: Props) => {
           username={username}
           id={id}
           showPopup={setShowEdit}
+          updateList={updateList}
         />
       )}
       {showDelete && (

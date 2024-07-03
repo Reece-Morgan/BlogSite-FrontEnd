@@ -21,7 +21,6 @@ export const DeletePopup = ({ id, showPopup, updateList }: Props) => {
       <div className={styles.popup}>
         <h2>Confirm Blog Post Deletion</h2>
         <p>Are you sure you want to delete this blog post?</p>
-        <p>{id}</p>
         <div className={styles.buttons}>
           <button onClick={deletePost}>Yes</button>
           <button onClick={() => showPopup(false)}>No</button>
