@@ -51,7 +51,7 @@ export const Dashboard = () => {
             <DashboardItem blogList={blogList} username={username} updateList={getUser} />
           )}
           {showCreate && (
-            <CreatePopup username={username} showPopup={setShowCreate} />
+            <CreatePopup username={username} showPopup={setShowCreate} updateList={getUser} />
           )}
         </div>
       )}

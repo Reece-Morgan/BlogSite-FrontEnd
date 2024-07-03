@@ -1,25 +1,32 @@
 "use client";
 
-import { callApiRouteForCreation } from "@blog/api";
 import styles from "../popup.module.css";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 
 interface Props {
   username: string;
   showPopup: (show: boolean) => void;
+  updateList: () => void;
 }
 
-export const CreatePopup = ({ username, showPopup }: Props) => {
+export const CreatePopup = ({ username, showPopup, updateList }: Props) => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
-  const createPost = async () => {
-    const res = await callApiRouteForCreation(
-      title,
-      content,
-      username
-    );
-    console.log("debug: ", res);
+  const createPost = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    await fetch("http://localhost:5189/api/blog/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        content,
+        author: username,
+        dateCreated: new Date(),
+        readLength: 2,
+      }),
+    });
+    updateList();
     showPopup(false);
   };
 
@@ -28,7 +35,7 @@ export const CreatePopup = ({ username, showPopup }: Props) => {
       <div className={styles.overlay} />
       <div className={styles.popup}>
         <h2>Create Blog Post</h2>
-        <form onSubmit={createPost} className={styles.form}>
+        <form method="post" onSubmit={createPost} className={styles.form}>
           <div>
             <label htmlFor="title">Title</label>
             <input
